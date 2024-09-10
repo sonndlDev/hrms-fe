@@ -1,7 +1,5 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import SettingsPage from "../pages-backup/SettingsPage";
-import ForbiddenPage from "../pages-backup/ForbiddenPage";
 import ProtectedLayout from "../components/ProtectedRoute";
 import DefaultLayout from "../layout/DefaultLayout";
 import PageTitle from "../components/PageTitle";
@@ -77,11 +75,9 @@ const AppRoutes: React.FC = () => {
           }
         />
         <Route path="/video-call-room/:roomID" element={<VideoCallRoom />} />
-        <Route path="/settings" element={<SettingsPage />} />
       </Route>
 
       {/* Forbidden page */}
-      <Route path="/403" element={<ForbiddenPage />} />
 
       {/* Fallback for unknown routes */}
       <Route path="*" element={<Navigate to="/overview" replace />} />
