@@ -1,3 +1,3 @@
-import { UserSlice } from "../store/user-slice";
+// import { UserSlice } from "../store/auth-slice";
 
-export type Store = UserSlice;
+// export type Store = UserSlice;

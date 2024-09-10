@@ -1,7 +1,7 @@
 import { devtools, persist, subscribeWithSelector } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 import { create } from "zustand";
-import { createAuthSlice, AuthSlice } from "./user-slice";
+import { createAuthSlice, AuthSlice } from "./auth-slice";
 import { createAttendanceSlice, AttendanceSlice } from "./attendance-slice"; 
 import { createMeetingSlice, MeetingSlice } from "./meeting-slice";
 
