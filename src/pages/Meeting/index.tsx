@@ -6,7 +6,7 @@ import CardMeeting from "./components/CardMeeting";
 import Loading from "../../components/loading";
 
 const MeetingsCpn = () => {
-  const { fetchMeetings, startMeetings, meetings, loading, error } = useStore(
+  const { fetchMeetings, startMeetings, meetings, loading } = useStore(
     useShallow((state) => ({
       fetchMeetings: state.fetchMeetings,
       meetings: state.meetings,
@@ -15,7 +15,6 @@ const MeetingsCpn = () => {
       error: state.error,
     }))
   );
-  console.log("🚀 ~ useShallow ~ meetings:", meetings);
 
   useEffect(() => {
     fetchMeetings();

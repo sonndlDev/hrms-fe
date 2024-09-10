@@ -24,7 +24,33 @@ import AccountActiveIcon from "../images/menu/account-active.svg";
 import SettingIcon from "../images/menu/setting.svg";
 import SettingActiveIcon from "../images/menu/setting-active.svg";
 
-export const menuItems = {
+
+
+
+// Define the type for a menu item
+interface MenuItem {
+  path: string;
+  name: string;
+  icon: string;
+  iconActive: string;
+  subItems: SubItem[];
+}
+
+// Define the type for a sub-item
+interface SubItem {
+  path: string;
+  name: string;
+  icon: string;
+  iconActive: string;
+}
+
+// Define the type for the menu items object
+type MenuItems = {
+  [key: string]: MenuItem;
+};
+
+
+export const menuItems:MenuItems = {
   dashboard: {
     path: "/overview",
     name: "Overview",

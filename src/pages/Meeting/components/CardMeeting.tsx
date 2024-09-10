@@ -5,23 +5,29 @@ interface MeetingRecord {
   _id: string;
   name: string;
   host: string;
-  participants: string;
+  participants: string[];
   date: string;
   status: string;
 }
 
 interface CardMeetingProps {
   item: MeetingRecord;
-  startMeetings: (id: string, {}) => Promise<void>;
+  startMeetings: (
+    id: string,
+    meetingData: { participants: string[] }
+  ) => Promise<void>;
 }
 const CardMeeting: React.FC<CardMeetingProps> = ({ item, startMeetings }) => {
   const navigate = useNavigate();
 
   const handleJoinRoom = async (id: string) => {
     try {
-      await startMeetings(id, {
-        participants: ["john.doe@example.com", "alice@example.com"],
-      });
+      const participants = ["participant1", "participant2"];
+
+      await startMeetings(item._id, { participants });
+      // await startMeetings(id, {
+      //   participants: ["john.doe@example.com", "alice@example.com"],
+      // });
       navigate(`/video-call-room/${id}`);
     } catch (error) {}
   };

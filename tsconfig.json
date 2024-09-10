@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-   "target": "es2016", // or "es2017", "es2018", etc.
-    "lib": ["dom", "es2016"], // include "es2016" or later
+   "target": "es2017", // or "es2017", "es2018", etc.
+    "lib": ["dom", "es2017"], // include "es2016" or later
     "module": "esnext",
     "jsx": "react-jsx",
     "strict": true,

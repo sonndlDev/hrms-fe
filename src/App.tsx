@@ -1,5 +1,4 @@
 import AppRoutes from "./app/routes";
-import LayoutCpn from "./pages-backup/layout";
 
 function App() {
   return (

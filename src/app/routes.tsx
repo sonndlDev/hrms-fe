@@ -76,10 +76,7 @@ const AppRoutes: React.FC = () => {
             </>
           }
         />
-        <Route
-          path="/video-call-room/:roomID"
-          element={<VideoCallRoom roomID={""} />}
-        />
+        <Route path="/video-call-room/:roomID" element={<VideoCallRoom />} />
         <Route path="/settings" element={<SettingsPage />} />
       </Route>
 

@@ -9,51 +9,57 @@ interface SidebarProps {
   setSidebarOpen: (arg: boolean) => void;
 }
 
-const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
+const Sidebar: React.FC<SidebarProps> = ({ sidebarOpen, setSidebarOpen }) => {
   const location = useLocation();
   const { pathname } = location;
 
-  const trigger = useRef<any>(null);
-  const sidebar = useRef<any>(null);
+  const trigger = useRef<HTMLButtonElement | null>(null);
+  const sidebar = useRef<HTMLDivElement | null>(null);
   const [openMenu, setOpenMenu] = useState<string | null>(null);
 
   const storedSidebarExpanded = localStorage.getItem("sidebar-expanded");
-  const [sidebarExpanded, setSidebarExpanded] = useState(
+  const [sidebarExpanded, setSidebarExpanded] = useState<boolean>(
     storedSidebarExpanded === null ? false : storedSidebarExpanded === "true"
   );
 
-  // close on click outside
+  // Close sidebar on click outside
   useEffect(() => {
-    const clickHandler = ({ target }: MouseEvent) => {
+    const clickHandler = (event: MouseEvent) => {
       if (!sidebar.current || !trigger.current) return;
       if (
         !sidebarOpen ||
-        sidebar.current.contains(target) ||
-        trigger.current.contains(target)
+        sidebar.current.contains(event.target as Node) ||
+        trigger.current.contains(event.target as Node)
       )
         return;
       setSidebarOpen(false);
     };
+
     document.addEventListener("click", clickHandler);
     return () => document.removeEventListener("click", clickHandler);
   }, [sidebarOpen]);
 
-  // close if the esc key is pressed
+  // Close sidebar on ESC key press
   useEffect(() => {
-    const keyHandler = ({ keyCode }: KeyboardEvent) => {
-      if (!sidebarOpen || keyCode !== 27) return;
+    const keyHandler = (event: KeyboardEvent) => {
+      if (!sidebarOpen || event.keyCode !== 27) return;
       setSidebarOpen(false);
     };
+
     document.addEventListener("keydown", keyHandler);
     return () => document.removeEventListener("keydown", keyHandler);
   }, [sidebarOpen]);
 
+  // Update sidebar-expanded state
   useEffect(() => {
     localStorage.setItem("sidebar-expanded", sidebarExpanded.toString());
-    if (sidebarExpanded) {
-      document.querySelector("body")?.classList.add("sidebar-expanded");
-    } else {
-      document.querySelector("body")?.classList.remove("sidebar-expanded");
+    const body = document.querySelector("body");
+    if (body) {
+      if (sidebarExpanded) {
+        body.classList.add("sidebar-expanded");
+      } else {
+        body.classList.remove("sidebar-expanded");
+      }
     }
   }, [sidebarExpanded]);
 
@@ -67,7 +73,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
     }
   };
 
-  // Update openMenu and activeSubItem based on pathname
+  // Update openMenu based on pathname
   useEffect(() => {
     const currentMenu = Object.entries(menuItems).find(
       ([key, item]) => pathname === item.path || pathname.startsWith(item.path)
