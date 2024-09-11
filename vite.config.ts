@@ -5,11 +5,5 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: [{ find: "@", replacement: "/src" }],
-  },
-  build: {
-    watch: {
-      include: 'src/**', // Theo dõi các file thay đổi trong thư mục src
-    },
-    
-  },
+  }
 });
